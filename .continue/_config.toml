@@ -1,0 +1,33 @@
+name: Local Assistant
+version: 1.0.0
+schema: v1
+models:
+  - name: llama3
+    provider: ollama
+    model: llama3:8B
+    roles:
+      - chat
+      - edit
+      - apply
+context:
+  - provider: code
+  - provider: docs
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase
+  - provider: file
+    path: {{YOUR_PATH}}/writing-guideline/writing-guidelines.md
+  - provider: folder
+    path: {{YOUR_PATH}}/writing-guideline/words
+
+prompts:
+  - name: check-writing-guidelines
+    description: ライティングガイドラインに基づいて文言をチェック
+    prompt: |
+      あなたは文言ライティングガイドラインに基づいてテキストをチェックするアシスタントです。
+      選択されたコードを読んで、ライティングガイドラインおよび用語集に従っているかどうかを確認してください。
+      なお、多言語化対応のために react-i18n-next を仕様しており、それに基づいて記載しています。
+      ライティングガイドライン：{{YOUR_PATH}}/writing-guideline/writing-guidelines.md
+      用語集：{{YOUR_PATH}}/writing-guideline/words
